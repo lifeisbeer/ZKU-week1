@@ -9,6 +9,21 @@ const Scalar = require("ffjavascript").Scalar;
 exports.p = Scalar.fromString("21888242871839275222246405745257275088548364400416034343698204186575808495617");
 const Fr = new F1Field(exports.p);
 
+describe("LessThan10", function () { // This test (and the compile script) are for testing my understanding of the previous material, please ignore 
+
+    it("Circuit should check if number is less than 10", async function () { 
+        const circuit = await wasm_tester("contracts/circuits/LessThan10.circom");
+
+        const INPUT = {
+            "in": 9 //10 //11 
+        }
+
+        const witness = await circuit.calculateWitness(INPUT, true); 
+
+        console.log(witness);
+    });
+});
+
 describe("SystemOfEquations circuit test", function () {
     this.timeout(100000000);
 
